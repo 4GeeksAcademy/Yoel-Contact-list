@@ -15,7 +15,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			]
 		},
 		actions: {
-			postContact: async(url, object) => {
+			postContact: async(object) => {
+				const url = "https://playground.4geeks.com/apis/fake/contact/";
 				const options = {
 					method: "POST",
 					headers: {
@@ -25,7 +26,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				const response = await fetch(url, options)
 				if(response.ok){
-					alert(`Contact added to ${object.agenda_slug}!`)
+					alert(`${object.full_name} added to ${object.agenda_slug}!`)
 				}
 				else{
 					alert("Sorry, somenthing went wrong.")

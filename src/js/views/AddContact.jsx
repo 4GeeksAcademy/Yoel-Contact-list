@@ -26,8 +26,6 @@ export const AddContact = () =>{
     const handleAgenda = (e) => {
         setAgenda(e.target.value)
     }
-    
-    
 
     const postContact = (e) => {
         e.preventDefault();
@@ -37,7 +35,6 @@ export const AddContact = () =>{
         const correctEmail = email.trim();
         const correctAdress = adress.trim();
 
-        const url = "https://playground.4geeks.com/apis/fake/contact/";
         const object = {
                 "full_name": `${correctName}`,
                 "email": `${correctEmail}`,
@@ -47,16 +44,16 @@ export const AddContact = () =>{
         };
 
         if(correctName != "" && correctAgenda != ""){
-            actions.postContact(url, object);
-            setName("");
-            setAdress("");
-            setEmail("");
-            setPhone("");
-            setAgenda("");
+            actions.postContact(object);
         }
         else{
             alert("Please introduce at least a valid name and agenda.")
         }
+        setName("");
+        setAdress("");
+        setEmail("");
+        setPhone("");
+        setAgenda("");
     }
 
     

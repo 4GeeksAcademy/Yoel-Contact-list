@@ -135,3 +135,6 @@
     background: #1f0438;
     border: none;
 }
+.input-group span{
+    width: 22%;
+} 

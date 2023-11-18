@@ -38,22 +38,16 @@ export const AddContact = () =>{
         const correctAdress = adress.trim();
 
         const url = "https://playground.4geeks.com/apis/fake/contact/";
-        const options = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
+        const object = {
                 "full_name": `${correctName}`,
                 "email": `${correctEmail}`,
                 "agenda_slug": `${correctAgenda}`,
                 "address": `${correctAdress}`,
-                "phone": `${correctPhone}` 
-            })            
+                "phone": `${correctPhone}`      
         };
 
         if(correctName != "" && correctAgenda != ""){
-            actions.postContact(url, options);
+            actions.postContact(url, object);
             setName("");
             setAdress("");
             setEmail("");

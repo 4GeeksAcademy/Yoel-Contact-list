@@ -1,18 +1,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			"currentAgenda": "",
+			"currentId": "",
 		},
 		actions: {
 			postContact: async(object) => {
@@ -91,8 +81,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				const response = await fetch(url, options)
 				if(response.ok){
-					const data = response.json()
+					const data = await response.json()
 					return data
+					
 				}
 				else{
 					alert("Sorry, somenthing went wrong.")

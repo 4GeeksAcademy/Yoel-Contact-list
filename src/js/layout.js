@@ -3,9 +3,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 
 import { AddContact } from "./views/AddContact.jsx";
+import { ContactGrid } from "./views/ContactGrid.jsx";
+
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
+
 
 
 //create your first component
@@ -20,8 +23,8 @@ const Layout = () => {
 					<Navbar />
 					<Routes>
 						<Route path="/" element={<AddContact />} />
-						{/* <Route path="/demo" element={<Demo />} />
-						<Route path="/single/:theid" element={<Single />} />
+						<Route path="/agenda" element={<ContactGrid />} />
+						{/* <Route path="/single/:theid" element={<Single />} />
 						<Route path="*" element={<h1>Not found!</h1>} /> */}
 					</Routes>
 			</BrowserRouter>

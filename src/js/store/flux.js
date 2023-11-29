@@ -1,43 +1,113 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			"currentAgenda": "",
+			"currentId": "",
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			postContact: async(object) => {
+				const url = "https://playground.4geeks.com/apis/fake/contact/";
+				const options = {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(object)            
+				};
+				const response = await fetch(url, options)
+				if(response.ok){
+					alert(`${object.full_name} added to "${object.agenda_slug}!"`)
+				}
+				else{
+					alert("Sorry, somenthing went wrong.")
+					console.log("Error :", response.status, response.statusText)
+				}
 			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
+
+			updateContact: async(object) => {
+				const url = "https://playground.4geeks.com/apis/fake/contact/";
+				const options = {
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(object)            
+				};
+				const response = await fetch(url, options)
+				if(response.ok){
+					alert(`${object.full_name} updated in "${object.agenda_slug}!"`)
+				}
+				else{
+					alert("Sorry, somenthing went wrong.")
+					console.log("Error :", response.status, response.statusText)
+				}
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
+			deleteContact: async(object) => {
+				const url = `https://playground.4geeks.com/apis/fake/contact/${object.id}`;
+				const options = {
+					method: "DELETE"          
+				};
+				const response = await fetch(url, options)
+				if(response.ok){
+					alert(`${object.full_name} deleted from "${object.agenda_slug}"!`)
+				}
+				else{
+					alert("Sorry, somenthing went wrong.")
+					console.log("Error :", response.status, response.statusText)
+				}
+			},
 
-				//reset the global store
-				setStore({ demo: demo });
-			}
+			deleteAgenda: async(agenda) => {
+				const url = `https://playground.4geeks.com/apis/fake/contact/agenda/${agenda}`;
+				const options = {
+					method: "DELETE"           
+				};
+				const response = await fetch(url, options)
+				if(response.ok){
+					alert(`Agenda "${agenda}" was deleted.`)
+				}
+				else{
+					alert("Sorry, somenthing went wrong.")
+					console.log("Error :", response.status, response.statusText)
+				}
+
+			},
+
+			getAgenda: async(agenda) => {
+				const url = `https://playground.4geeks.com/apis/fake/contact/agenda/${agenda}`;
+				const options = {
+					method: "GET"           
+				};
+				const response = await fetch(url, options)
+				if(response.ok){
+					const data = await response.json()
+					return data
+					
+				}
+				else{
+					alert("Sorry, somenthing went wrong.")
+					console.log("Error :", response.status, response.statusText)
+				}
+
+			},
+
+			getContact: async(id) => {
+				const url = `https://playground.4geeks.com/apis/fake/contact/${id}`;
+				const options = {
+					method: "GET"           
+				};
+				const response = await fetch(url, options)
+				if(response.ok){
+					const data = response.json()
+					return data
+				}
+				else{
+					alert("Sorry, somenthing went wrong.")
+					console.log("Error :", response.status, response.statusText)
+				}
+
+			}					
 		}
 	};
 };
